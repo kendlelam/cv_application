@@ -1,35 +1,68 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import Header from './components/Header'
+import InputGroup from './components/InputGroup'
+import CVDisplay from './components/CVDisplay'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [personalInfo, setPersonalInfo] = useState({
+    name:'',
+    email:'',
+    phone:'',
+    location:''
+
+  });
+
+  const [education, setEducation] = useState({
+    school:'',
+    degree:'',
+    'start date':'',
+    'end date':'',
+    location:'',
+
+  });
+
+  function handleState(keyName, newVal, section) {
+    let replacement;
+    if (section === "Personal Information") {
+      replacement = {
+        ...personalInfo,
+      }
+      replacement[keyName] = newVal;
+      setPersonalInfo(replacement);
+    } else if (section === "Education") {
+      replacement = {
+        ...education,
+      }
+      replacement[keyName] = newVal;
+      setEducation(replacement);
+    }    
+    
+  }
+
+  
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header />
+      
+      <div className="flex">
+        <div className="infoCol">
+          <InputGroup title="Personal Information" inputArray={Object.keys(personalInfo)} handleChange={handleState}/>
+          <InputGroup title="Education" inputArray={Object.keys(education)} handleChange={handleState}/>
+        </div>
+        
+        <CVDisplay 
+        personalInfo={personalInfo} 
+        education={education}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
+
+
 
 export default App
