@@ -11,13 +11,14 @@ function App() {
     name:'',
     email:'',
     phone:'',
-    location:''
+    address:''
 
   });
 
   const [education, setEducation] = useState({
     school:'',
     degree:'',
+    gpa:'',
     'start date':'',
     'end date':'',
     location:'',

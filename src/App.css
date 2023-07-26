@@ -8,6 +8,8 @@
 .infoCol{
   width:35%;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   gap:20px;
 }
+
