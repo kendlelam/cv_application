@@ -1,17 +1,20 @@
 import '../styles/cvdisplay.css';
+import React from 'react';
 import ResumeSection from './ResumeSection';
 import SplitBar from './SplitBar';
-export default function CVDisplay({
-    personalInfo, education
 
-}){
+
+const CVDisplay = React.forwardRef((props, ref) => {
     
+    const {personalInfo, education, workExperience, skills} = props
     const personalInfoFilled = hasInfo(personalInfo);
     const educationFilled = hasInfo(education);
-
+    const workExperienceFilled = hasInfo(workExperience);
+    const skillsFilled = hasInfo(skills);
+    const skillsArray = [...Object.values(skills)]
 
     return (
-        <div className='resume'>
+        <div ref={ref} className='resume'>
             <div className="resume-title">{personalInfo.name}</div>
             {
                 personalInfoFilled && 
@@ -38,11 +41,48 @@ export default function CVDisplay({
 
                 </ResumeSection>
             }
+            {
+                workExperienceFilled && 
+                <ResumeSection title="Work Experience">
+                <SplitBar>
+                {workExperience.company !== "" && <div className="bold">{workExperience.company}</div>}
+                <div className="flex-row">
+                {(workExperience['start date'] !== "" || workExperience['end date'] !== "") && <div>{workExperience['start date'] + ' - ' + workExperience['end date']}</div>}
+                </div>
+                </SplitBar>
+                
+                {workExperience.position !== "" && <div>{workExperience.position}</div>}
+
+                
+                {workExperience.location !== "" && <div>{'Location: ' + workExperience.location}</div>}
+                {workExperience.description !== "" && <div>{workExperience.description}</div>}
+
+                </ResumeSection>
+            }
+
+            {
+                skillsFilled && 
+                <ResumeSection title="Relevant Skills">
+                    <ul className="skillList">
+                        {skillsArray.map(e=>{
+                            if (e !== ""){
+                                return <li key={e}>{e}</li>    
+                            }
+                        } 
+                        )}
+                    </ul>
+                </ResumeSection>
+
+            }
             
             
         </div>
+        
+            
     );
-}
+});
+
+CVDisplay.displayName = "CVDisplay";
 
 function hasInfo(object) {
     for (const key in object) {
@@ -53,3 +93,5 @@ function hasInfo(object) {
     return false;
     
 }
+
+export default CVDisplay;

@@ -4,7 +4,6 @@
   gap:50px;
   justify-content: space-evenly;
 }
-
 .infoCol{
   width:35%;
   display: flex;
@@ -13,3 +12,33 @@
   gap:20px;
 }
 
+
+
+.button{
+  padding:15px;
+  border:none;
+  color:white;
+  font-weight: bold;
+  border-radius:1em;
+  margin-left:10px;
+}
+
+.sample{
+  
+  background-color: rgb(108, 197, 108);
+  
+}
+
+.download{
+  background-color: rgb(243, 126, 105);
+}
+
+@media (max-width:1000px) {
+  .flex{
+    flex-direction: column;
+  }
+
+  .infoCol{
+    width:100%;
+  }
+}
