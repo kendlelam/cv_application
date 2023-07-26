@@ -1,8 +1,7 @@
 {
   "name": "cv-application",
-  "private": true,
   "version": "0.0.0",
-  "homepage": "https://kendlelam.github.io/cv_application",
+  "homepage": "https://kendlelam.github.io/",
   "type": "module",
   "scripts": {
     "predeploy":"npm run build",
